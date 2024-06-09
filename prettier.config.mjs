@@ -7,14 +7,6 @@ const config = {
   endOfLine: 'crlf',
   printWidth: 80,
   trailingComma: 'none',
-  overrides: [
-    {
-      files: ['*.component.html'],
-      options: {
-        parser: 'angular'
-      }
-    }
-  ],
   plugins: ['prettier-plugin-jsdoc', 'prettier-plugin-tailwindcss']
 };
 
