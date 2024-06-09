@@ -1,0 +1,5 @@
+# Project Words
+!hte
+avenir
+browserslist
+tailwindcss
