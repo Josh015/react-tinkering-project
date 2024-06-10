@@ -1,10 +1,28 @@
 import localforage from 'localforage';
 
-import { User } from './types';
+import { Note, User } from './types';
 import users from 'src/assets/users.json';
 
 export async function fetchUsers(): Promise<User[]> {
-  await localforage.setItem('users', users);
+  const usersData: User[] = users.map((u) => {
+    return {
+      id: u.id,
+      birthDate: new Date(u.birthDate),
+      name: u.name,
+      avatar: u.avatar,
+      bio: u.bio,
+      gender: u.gender,
+      notes: u.notes.map((n) => {
+        return {
+          id: n.id,
+          title: n.title,
+          date: new Date(n.date)
+        } as Note;
+      })
+    } as User;
+  });
+
+  await set(usersData);
   return getUsers();
 }
 
@@ -45,6 +63,6 @@ export async function getUser(id: number): Promise<User | null> {
 //   return false;
 // }
 
-// function set(users) {
-//   return localforage.setItem('users', users);
-// }
+function set(users: User[]): Promise<User[]> {
+  return localforage.setItem('users', users);
+}

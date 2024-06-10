@@ -1,14 +1,14 @@
+import { Box } from '@mui/material';
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider
 } from 'react-router-dom';
 
-import ContactManager from './routes/ContactManager';
-import NotFound from './routes/NotFound';
-import { Box } from '@mui/material';
-import MainContent from './routes/ContactManager/MainContent';
 import { fetchUsers, getUser } from './api/users';
+import ContactManager from './routes/ContactManager';
+import MainContent from './routes/ContactManager/MainContent';
+import NotFound from './routes/NotFound';
 
 const router = createBrowserRouter([
   {
