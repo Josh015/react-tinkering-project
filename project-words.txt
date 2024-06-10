@@ -2,4 +2,5 @@
 !hte
 avenir
 browserslist
+localforage
 tailwindcss
