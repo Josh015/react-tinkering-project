@@ -5,6 +5,7 @@ import imports from 'eslint-plugin-import';
 import js from '@eslint/js';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 import ts from 'typescript-eslint';
 
 const __dirname = import.meta.dirname;
@@ -55,12 +56,15 @@ export default ts.config(
       ...compat.config(imports.configs.typescript),
       ...compat.config(reactHooks.configs.recommended)
     ],
+    plugins: {
+      'react-refresh': reactRefresh
+    },
     rules: {
       // React fixes
-      // 'react-refresh/only-export-components': [
-      //   'warn',
-      //   { allowConstantExport: true }
-      // ],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true }
+      ],
 
       // Tailwind fixes
       'import/no-named-as-default': 'off',
