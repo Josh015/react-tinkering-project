@@ -1,15 +1,16 @@
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
   Container,
   ListItemButton,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Menu,
+  MenuItem
 } from '@mui/material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Badge from '@mui/material/Badge';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
@@ -77,9 +78,17 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function ContactManager() {
-  const [open, setOpen] = React.useState(true);
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
   const toggleDrawer = () => {
-    setOpen(!open);
+    setDrawerOpen(!drawerOpen);
+  };
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const menuOpen = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
   const users = useLoaderData() as User[];
 
@@ -87,7 +96,7 @@ export default function ContactManager() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={drawerOpen}>
           <Toolbar
             sx={{
               pr: '24px' // keep right padding when drawer closed
@@ -100,7 +109,7 @@ export default function ContactManager() {
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-                ...(open && { display: 'none' })
+                ...(drawerOpen && { display: 'none' })
               }}
             >
               <MenuIcon />
@@ -114,14 +123,43 @@ export default function ContactManager() {
             >
               Contact Manager
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton
+              aria-label="more"
+              aria-controls={drawerOpen ? 'long-menu' : undefined}
+              aria-expanded={drawerOpen ? 'true' : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreVertIcon />
             </IconButton>
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={menuOpen}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+            >
+              <MenuItem disabled={true} onClick={handleClose}>
+                New Contact
+              </MenuItem>
+              <MenuItem disabled={true} onClick={handleClose}>
+                Toggle Theme
+              </MenuItem>
+              <MenuItem disabled={true} onClick={handleClose}>
+                Toggle Direction
+              </MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={drawerOpen}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -143,7 +181,7 @@ export default function ContactManager() {
                 href={`/contact-manager/${user.id}`}
               >
                 <ListItemButton>
-                  <ListItemText primary={user.name} />
+                  <ListItemText hidden={!drawerOpen} primary={user.name} />
                   <ListItemIcon>
                     <AssignmentIcon />
                   </ListItemIcon>
