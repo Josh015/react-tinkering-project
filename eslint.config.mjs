@@ -1,11 +1,10 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import cspellRecommended from '@cspell/eslint-plugin/recommended';
-import globals from 'globals';
-import imports from 'eslint-plugin-import';
+import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
 import ts from 'typescript-eslint';
 
 const __dirname = import.meta.dirname;
@@ -38,22 +37,10 @@ export default ts.config(
   cspellRecommended,
   prettierRecommended,
   {
-    files: ['**/*.mjs'],
-    rules: {
-      'sort-imports': 'error'
-    }
-  },
-  {
     files: ['**/*.ts', '**/*.tsx'],
-    settings: {
-      // Manually add "src/" directory to import plugin's "internal" group
-      'import/internal-regex': '^src/'
-    },
     extends: [
       ...ts.configs.strictTypeChecked,
       ...ts.configs.stylisticTypeChecked,
-      ...compat.config(imports.configs.recommended),
-      ...compat.config(imports.configs.typescript),
       ...compat.config(reactHooks.configs.recommended)
     ],
     plugins: {
@@ -65,10 +52,6 @@ export default ts.config(
         'warn',
         { allowConstantExport: true }
       ],
-
-      // Tailwind fixes
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off',
 
       // Preferences
       '@typescript-eslint/restrict-template-expressions': 'off',
@@ -84,6 +67,10 @@ export default ts.config(
           trailingUnderscore: 'forbid'
         },
         {
+          selector: 'objectLiteralProperty',
+          format: []
+        },
+        {
           selector: 'import',
           format: ['camelCase', 'PascalCase']
         },
@@ -93,7 +80,7 @@ export default ts.config(
         },
         {
           selector: 'variable',
-          format: ['camelCase', 'UPPER_CASE']
+          format: ['camelCase', 'PascalCase', 'UPPER_CASE']
         },
         {
           selector: 'typeLike',
@@ -102,29 +89,6 @@ export default ts.config(
         {
           selector: 'enumMember',
           format: ['PascalCase']
-        }
-      ],
-      'import/no-unresolved': 'off',
-      'import/order': [
-        'error',
-        {
-          groups: [
-            // Global
-            ['builtin', 'external'],
-
-            // Project
-            ['internal', 'parent', 'sibling', 'index'],
-
-            // Misc.
-            'type',
-            'object',
-            'unknown'
-          ],
-          'newlines-between': 'always',
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true
-          }
         }
       ]
     }

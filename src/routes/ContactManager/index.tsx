@@ -1,30 +1,32 @@
-import { Outlet, useLoaderData } from 'react-router-dom';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import React from 'react';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import { ListItemButton } from '@mui/material';
-import { ListItemIcon } from '@mui/material';
-import { ListItemText } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import MenuIcon from '@mui/icons-material/Menu';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import {
+  Container,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText
+} from '@mui/material';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Badge from '@mui/material/Badge';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import MuiDrawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
+import List from '@mui/material/List';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import React from 'react';
+import { Outlet, useLoaderData } from 'react-router-dom';
 
 import { User } from 'src/api/types';
-import { Container } from '@mui/material';
 
 const defaultTheme = createTheme();
-const drawerWidth: number = 240;
+const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
