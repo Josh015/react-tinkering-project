@@ -22,6 +22,7 @@ import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Outlet, useLoaderData } from 'react-router-dom';
 
 import { User } from 'src/api/types';
@@ -78,6 +79,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function ContactManager() {
+  const { t } = useTranslation();
+  const prefix = 'ContactManager.Toolbar.';
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -121,7 +124,7 @@ export default function ContactManager() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Contact Manager
+              {t(`${prefix}Title`)}
             </Typography>
             <IconButton
               aria-label="more"
@@ -133,8 +136,6 @@ export default function ContactManager() {
               <MoreVertIcon />
             </IconButton>
             <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
               anchorEl={anchorEl}
               open={menuOpen}
               onClose={handleClose}
@@ -148,13 +149,13 @@ export default function ContactManager() {
               }}
             >
               <MenuItem disabled={true} onClick={handleClose}>
-                New Contact
+                {t(`${prefix}Menu.NewContact`)}
               </MenuItem>
               <MenuItem disabled={true} onClick={handleClose}>
-                Toggle Theme
+                {t(`${prefix}Menu.ToggleTheme`)}
               </MenuItem>
               <MenuItem disabled={true} onClick={handleClose}>
-                Toggle Direction
+                {t(`${prefix}Menu.ToggleDir`)}
               </MenuItem>
             </Menu>
           </Toolbar>

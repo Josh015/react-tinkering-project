@@ -4,5 +4,6 @@ avenir
 browserslist
 enby
 ianvs
+languagedetector
 localforage
 tailwindcss

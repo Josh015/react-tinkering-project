@@ -1,14 +1,16 @@
 import { TabList, TabPanel } from '@mui/lab';
 import TabContext from '@mui/lab/TabContext';
 import { Box, Card, CardContent, Tab, Typography } from '@mui/material';
-import { format } from 'date-fns';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 
 import Notes from './Notes';
 import { User } from 'src/api/types';
 
 export default function MainContent() {
+  const { t } = useTranslation();
+  const prefix = 'ContactManager.MainContent.';
   const user = useLoaderData() as User | null;
   const [value, setValue] = React.useState('0');
 
@@ -29,21 +31,23 @@ export default function MainContent() {
       >
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {user.name} {user.gender}
+            {t(`${prefix}Title.NameAndGender`, {
+              name: user.name,
+              gender: user.gender
+            })}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Birthday: {format(user.birthDate, 'MMMM d, yyyy')}
+            {t(`${prefix}SubTitle.Birthday`, {
+              birthDate: user.birthDate
+            })}
           </Typography>
 
           <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList
-                  onChange={handleChange}
-                  aria-label="lab API tabs example"
-                >
-                  <Tab label="Bio" value="0" />
-                  <Tab label="Notes" value="1" />
+                <TabList onChange={handleChange}>
+                  <Tab label={t(`${prefix}Tabs.Bio`)} value="0" />
+                  <Tab label={t(`${prefix}Tabs.Notes`)} value="1" />
                 </TabList>
               </Box>
               <TabPanel value="0">{user.bio}</TabPanel>
