@@ -8,7 +8,9 @@ import {
 import ContactManager, { contactManagerLoader } from './routes/ContactManager';
 import NotFound from './routes/NotFound';
 import { Box } from '@mui/material';
-import MainContent from './routes/ContactManager/MainContent';
+import MainContent, {
+  mainContentLoader
+} from './routes/ContactManager/MainContent';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
     loader: contactManagerLoader,
     children: [
       { index: true, element: <Box /> },
-      { path: ':id', element: <MainContent /> }
+      { path: ':id', element: <MainContent />, loader: mainContentLoader }
     ]
   },
   {

@@ -23,11 +23,16 @@ export async function getUsers(): Promise<User[]> {
 //   return user;
 // }
 
-// export async function getUser(id) {
-//   const users = await localforage.getItem('users');
-//   const user = users.find((user) => user.id === id);
-//   return user ?? null;
-// }
+export async function getUser(id: number): Promise<User | null> {
+  const users = await localforage.getItem<User[]>('users');
+
+  if (users === null) {
+    return null;
+  } else {
+    const user = users.find((user) => user.id === id);
+    return user ?? null;
+  }
+}
 
 // export async function deleteUser(id) {
 //   const users = await localforage.getItem('users');
