@@ -2,19 +2,10 @@ import { Box, Card, CardContent, Tab, Typography } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import { TabList, TabPanel } from '@mui/lab';
 import React from 'react';
-import { Params, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
-import { getUser } from 'src/api/users';
 import { User } from 'src/api/types';
 import { format } from 'date-fns';
-
-export function mainContentLoader({
-  params: { id }
-}: {
-  params: Readonly<Params<string>>;
-}): Promise<User | null> {
-  return getUser(+(id ?? 0));
-}
 
 export default function MainContent() {
   const user = useLoaderData() as User;

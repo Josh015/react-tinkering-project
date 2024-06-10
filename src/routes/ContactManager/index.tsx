@@ -21,7 +21,6 @@ import { ListItemIcon } from '@mui/material';
 import { ListItemText } from '@mui/material';
 
 import { User } from 'src/api/types';
-import { fetchUsers } from 'src/api/users';
 import { Container } from '@mui/material';
 
 const defaultTheme = createTheme();
@@ -74,10 +73,6 @@ const Drawer = styled(MuiDrawer, {
     })
   }
 }));
-
-export async function contactManagerLoader(): Promise<User[]> {
-  return fetchUsers();
-}
 
 export default function ContactManager() {
   const [open, setOpen] = React.useState(true);

@@ -4,21 +4,24 @@ import {
   RouterProvider
 } from 'react-router-dom';
 
-import ContactManager, { contactManagerLoader } from './routes/ContactManager';
+import ContactManager from './routes/ContactManager';
 import NotFound from './routes/NotFound';
 import { Box } from '@mui/material';
-import MainContent, {
-  mainContentLoader
-} from './routes/ContactManager/MainContent';
+import MainContent from './routes/ContactManager/MainContent';
+import { fetchUsers, getUser } from './api/users';
 
 const router = createBrowserRouter([
   {
     path: '/contact-manager',
     element: <ContactManager />,
-    loader: contactManagerLoader,
+    loader: () => fetchUsers(),
     children: [
       { index: true, element: <Box /> },
-      { path: ':id', element: <MainContent />, loader: mainContentLoader }
+      {
+        path: ':id',
+        element: <MainContent />,
+        loader: ({ params: { id } }) => getUser(+(id ?? 0))
+      }
     ]
   },
   {
