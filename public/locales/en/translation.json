@@ -39,6 +39,10 @@
         }
       },
       "Save": "Save",
+      "SnackBar": {
+        "Action": "Navigate",
+        "Message": "Contact added"
+      },
       "Title": "Add new contact"
     },
     "Notes": {
@@ -66,10 +70,6 @@
         "NewContact": "New Contact",
         "ToggleDir": "Toggle Direction",
         "ToggleTheme": "Toggle Theme"
-      },
-      "SnackBar": {
-        "Action": "Navigate",
-        "Message": "Contact added"
       },
       "Title": "Contact Manager"
     }

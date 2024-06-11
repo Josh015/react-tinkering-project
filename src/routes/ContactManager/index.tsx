@@ -25,6 +25,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useLoaderData } from 'react-router-dom';
 
+import NewContactDialog from './NewContactDialog';
 import { User } from 'src/api/types';
 
 const defaultTheme = createTheme();
@@ -93,6 +94,14 @@ export default function ContactManager() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const [newContactDialogOpen, setNewContactDialogOpen] = React.useState(false);
+  const handleNewContactDialogOpen = () => {
+    setNewContactDialogOpen(true);
+    handleClose();
+  };
+  const handleNewContactDialogClose = () => {
+    setNewContactDialogOpen(false);
+  };
   const users = useLoaderData() as User[];
 
   return (
@@ -148,7 +157,7 @@ export default function ContactManager() {
                 horizontal: 'left'
               }}
             >
-              <MenuItem disabled={true} onClick={handleClose}>
+              <MenuItem onClick={handleNewContactDialogOpen}>
                 {t(`${prefix}Menu.NewContact`)}
               </MenuItem>
               <MenuItem disabled={true} onClick={handleClose}>
@@ -209,6 +218,10 @@ export default function ContactManager() {
           </Container>
         </Box>
       </Box>
+      <NewContactDialog
+        open={newContactDialogOpen}
+        onClose={handleNewContactDialogClose}
+      />
     </ThemeProvider>
   );
 }

@@ -1,4 +1,5 @@
 import localforage from 'localforage';
+import { maxBy } from 'lodash';
 
 import { Note, User } from './types';
 import users from 'src/assets/users.json';
@@ -32,14 +33,16 @@ export async function getUsers(): Promise<User[]> {
   return users;
 }
 
-// export async function createUser({ title, content }) {
-//   const id = Math.random().toString(36).substring(2, 9);
-//   const user = { id, title, content };
-//   const users = await getUsers();
-//   users.unshift(user);
-//   await set(users);
-//   return user;
-// }
+export async function createUser(user: User) {
+  const users = await getUsers();
+  const lastAdded = maxBy(users, (u) => u.id);
+
+  user.id = (lastAdded?.id ?? 0) + 1;
+
+  users.unshift(user);
+  await set(users);
+  return user;
+}
 
 export async function getUser(id: number): Promise<User | null> {
   const users = await localforage.getItem<User[]>('users');

@@ -20,7 +20,7 @@ pnpm start
 
 ## ToDo
 
-- [ ] Add basic user creation dialog UI.
+- [x] Add basic user creation dialog UI.
 - [ ] Add user creation form validation with error-reporting.
 - [ ] Add `active` style for currently selected user in SideNav list.
 - [ ] Add theme-switching support via menu.

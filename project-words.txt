@@ -2,6 +2,7 @@
 !hte
 avenir
 browserslist
+clickaway
 enby
 ianvs
 languagedetector
