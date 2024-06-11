@@ -7,4 +7,3 @@ enby
 ianvs
 languagedetector
 localforage
-tailwindcss

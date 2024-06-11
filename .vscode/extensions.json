@@ -19,9 +19,6 @@
     // Consistent markdown style.
     "davidanson.vscode-markdownlint",
 
-    // Tailwind CSS integration.
-    "bradlc.vscode-tailwindcss",
-
     // Consistent editor settings.
     "editorconfig.editorconfig",
 
