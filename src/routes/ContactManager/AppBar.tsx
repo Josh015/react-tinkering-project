@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import { Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NewContactDialog from './NewContactDialog';
@@ -43,15 +43,15 @@ const AppBarStyles = styled(MuiAppBar, {
 export default function AppBar({ open, toggleDrawer }: AppBarProps) {
   const { t } = useTranslation();
   const prefix = 'ContactManager.Toolbar.';
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const [newContactDialogOpen, setNewContactDialogOpen] = React.useState(false);
+  const [newContactDialogOpen, setNewContactDialogOpen] = useState(false);
   const handleNewContactDialogOpen = () => {
     setNewContactDialogOpen(true);
     handleClose();
@@ -61,7 +61,7 @@ export default function AppBar({ open, toggleDrawer }: AppBarProps) {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <AppBarStyles position="absolute" open={open}>
         <Toolbar
           sx={{
@@ -128,6 +128,6 @@ export default function AppBar({ open, toggleDrawer }: AppBarProps) {
         open={newContactDialogOpen}
         onClose={handleNewContactDialogClose}
       />
-    </React.Fragment>
+    </Fragment>
   );
 }

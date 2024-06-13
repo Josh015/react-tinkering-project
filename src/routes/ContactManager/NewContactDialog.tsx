@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import React from 'react';
+import { FormEvent, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,8 +25,8 @@ export default function NewContactDialog({
   const prefix = 'ContactManager.NewContactDialog.';
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [newUserId, setNewUserId] = React.useState<number | null>(null);
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [newUserId, setNewUserId] = useState<number | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
@@ -37,7 +37,7 @@ export default function NewContactDialog({
   };
 
   const action = (
-    <React.Fragment>
+    <Fragment>
       <Button
         color="secondary"
         size="small"
@@ -56,17 +56,17 @@ export default function NewContactDialog({
       >
         <CloseIcon fontSize="small" />
       </IconButton>
-    </React.Fragment>
+    </Fragment>
   );
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Dialog
         open={open}
         onClose={handleDialogClose}
         PaperProps={{
           component: 'form',
-          onSubmit: async (event: React.FormEvent<HTMLFormElement>) => {
+          onSubmit: async (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
@@ -169,6 +169,6 @@ export default function NewContactDialog({
         message={t(`${prefix}SnackBar.Message`)}
         action={action}
       />
-    </React.Fragment>
+    </Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import { TabList, TabPanel } from '@mui/lab';
 import TabContext from '@mui/lab/TabContext';
 import { Box, Card, CardContent, Tab, Typography } from '@mui/material';
-import React from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 
@@ -12,9 +12,9 @@ export default function MainContent() {
   const { t } = useTranslation();
   const prefix = 'ContactManager.MainContent.';
   const user = useLoaderData() as User | null;
-  const [value, setValue] = React.useState('0');
+  const [value, setValue] = useState('0');
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setValue(newValue.toString());
   };
 
