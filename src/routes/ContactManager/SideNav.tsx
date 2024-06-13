@@ -4,10 +4,10 @@ import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import MuiDrawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
+import { Link } from 'react-router-dom';
 
 import { User } from 'src/api/types';
 
@@ -66,7 +66,7 @@ export default function SideNav({ users, open, toggleDrawer }: SideNavProps) {
           <Link
             key={user.id}
             color="inherit"
-            href={`/contact-manager/${user.id}`}
+            to={`/contact-manager/${user.id}`}
           >
             <ListItemButton>
               <ListItemText hidden={!open} primary={user.name} />
