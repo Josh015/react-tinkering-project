@@ -7,16 +7,16 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
+import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 
+import { isDrawerOpenAtom } from 'src/contexts';
 import { User } from 'src/models';
 
 const drawerWidth = 240;
 
 interface SideNavProps {
   users: User[];
-  open: boolean;
-  toggleDrawer: () => void;
 }
 
 const Drawer = styled(MuiDrawer, {
@@ -45,9 +45,11 @@ const Drawer = styled(MuiDrawer, {
   }
 }));
 
-export default function SideNav({ users, open, toggleDrawer }: SideNavProps) {
+export default function SideNav({ users }: SideNavProps) {
+  const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
+
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant="permanent" open={drawerOpen}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -56,7 +58,11 @@ export default function SideNav({ users, open, toggleDrawer }: SideNavProps) {
           px: [1]
         }}
       >
-        <IconButton onClick={toggleDrawer}>
+        <IconButton
+          onClick={() => {
+            setDrawerOpen(!drawerOpen);
+          }}
+        >
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
@@ -69,7 +75,7 @@ export default function SideNav({ users, open, toggleDrawer }: SideNavProps) {
             to={`/contact-manager/${user.id}`}
           >
             <ListItemButton>
-              <ListItemText hidden={!open} primary={user.name} />
+              <ListItemText hidden={!drawerOpen} primary={user.name} />
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>

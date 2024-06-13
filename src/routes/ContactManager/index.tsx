@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
-import { useState } from 'react';
 import { Outlet, useLoaderData } from 'react-router-dom';
 
 import AppBar from './AppBar';
@@ -13,19 +12,14 @@ import { User } from 'src/models';
 const defaultTheme = createTheme();
 
 export default function ContactManager() {
-  const [drawerOpen, setDrawerOpen] = useState(true);
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
-  };
-
   const users = useLoaderData() as User[];
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar open={drawerOpen} toggleDrawer={toggleDrawer} />
-        <SideNav users={users} open={drawerOpen} toggleDrawer={toggleDrawer} />
+        <AppBar />
+        <SideNav users={users} />
         <Box
           component="main"
           sx={{

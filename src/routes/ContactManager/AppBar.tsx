@@ -6,17 +6,14 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { useAtom } from 'jotai';
 import { Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NewContactDialog from './NewContactDialog';
+import { isDrawerOpenAtom } from 'src/contexts';
 
 const drawerWidth = 240;
-
-interface AppBarProps {
-  open: boolean;
-  toggleDrawer: () => void;
-}
 
 interface AppBarStylesProps extends MuiAppBarProps {
   open?: boolean;
@@ -40,7 +37,7 @@ const AppBarStyles = styled(MuiAppBar, {
   })
 }));
 
-export default function AppBar({ open, toggleDrawer }: AppBarProps) {
+export default function AppBar() {
   const { t } = useTranslation();
   const prefix = 'ContactManager.Toolbar.';
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -59,10 +56,11 @@ export default function AppBar({ open, toggleDrawer }: AppBarProps) {
   const handleNewContactDialogClose = () => {
     setNewContactDialogOpen(false);
   };
+  const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
 
   return (
     <Fragment>
-      <AppBarStyles position="absolute" open={open}>
+      <AppBarStyles position="absolute" open={drawerOpen}>
         <Toolbar
           sx={{
             pr: '24px' // keep right padding when drawer closed
@@ -72,10 +70,12 @@ export default function AppBar({ open, toggleDrawer }: AppBarProps) {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleDrawer}
+            onClick={() => {
+              setDrawerOpen(!drawerOpen);
+            }}
             sx={{
               marginRight: '36px',
-              ...(open && { display: 'none' })
+              ...(drawerOpen && { display: 'none' })
             }}
           >
             <MenuIcon />
@@ -91,8 +91,8 @@ export default function AppBar({ open, toggleDrawer }: AppBarProps) {
           </Typography>
           <IconButton
             aria-label="more"
-            aria-controls={open ? 'long-menu' : undefined}
-            aria-expanded={open ? 'true' : undefined}
+            aria-controls={drawerOpen ? 'long-menu' : undefined}
+            aria-expanded={drawerOpen ? 'true' : undefined}
             aria-haspopup="true"
             onClick={handleClick}
           >
