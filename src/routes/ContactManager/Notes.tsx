@@ -1,6 +1,6 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
-import { Note } from 'src/api/types';
+import { Note } from 'src/models';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'No.', width: 70 },

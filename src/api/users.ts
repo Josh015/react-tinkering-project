@@ -1,8 +1,8 @@
 import localforage from 'localforage';
 import { maxBy } from 'lodash';
 
-import { Note, User } from './types';
 import users from 'src/assets/users.json';
+import { Note, User } from 'src/models';
 
 export async function fetchUsers(): Promise<User[]> {
   const usersData: User[] = users.map((u) => {

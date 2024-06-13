@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import { Link } from 'react-router-dom';
 
-import { User } from 'src/api/types';
+import { User } from 'src/models';
 
 const drawerWidth = 240;
 

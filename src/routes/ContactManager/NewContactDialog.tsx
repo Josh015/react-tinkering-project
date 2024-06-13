@@ -10,8 +10,8 @@ import { FormEvent, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Avatar, AVATARS, Gender, GENDERS, User } from 'src/api/types';
 import { createUser } from 'src/api/users';
+import { Avatar, AVATARS, Gender, GENDERS, User } from 'src/models';
 
 interface NewContactDialogProps {
   open: boolean;

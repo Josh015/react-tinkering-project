@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 
 import Notes from './Notes';
-import { User } from 'src/api/types';
+import { User } from 'src/models';
 
 export default function MainContent() {
   const { t } = useTranslation();

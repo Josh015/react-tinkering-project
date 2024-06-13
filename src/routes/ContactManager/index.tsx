@@ -8,7 +8,7 @@ import { Outlet, useLoaderData } from 'react-router-dom';
 
 import AppBar from './AppBar';
 import SideNav from './SideNav';
-import { User } from 'src/api/types';
+import { User } from 'src/models';
 
 const defaultTheme = createTheme();
 
