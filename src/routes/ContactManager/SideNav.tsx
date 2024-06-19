@@ -42,7 +42,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function SideNav() {
-  const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
+  const [isDrawerOpen, setIsDrawerOpen] = useAtom(isDrawerOpenAtom);
   const users = useAtomValue(usersAtom);
   const isLeftToRight = useAtomValue(isLeftToRightAtom);
 
@@ -50,7 +50,7 @@ export default function SideNav() {
     <Drawer
       anchor={isLeftToRight ? 'left' : 'right'}
       variant="permanent"
-      open={drawerOpen}
+      open={isDrawerOpen}
     >
       <Toolbar
         sx={{
@@ -62,7 +62,7 @@ export default function SideNav() {
       >
         <IconButton
           onClick={() => {
-            setDrawerOpen(!drawerOpen);
+            setIsDrawerOpen(!isDrawerOpen);
           }}
         >
           <ChevronLeftIcon />
@@ -77,7 +77,7 @@ export default function SideNav() {
             to={`/contact-manager/${user.id}`}
           >
             <ListItemButton>
-              <ListItemText hidden={!drawerOpen} primary={user.name} />
+              <ListItemText hidden={!isDrawerOpen} primary={user.name} />
               <ListItemIcon>
                 <AssignmentIcon />
               </ListItemIcon>

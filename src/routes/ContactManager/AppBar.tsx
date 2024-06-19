@@ -45,7 +45,7 @@ export default function AppBar() {
   const prefix = 'ContactManager.Toolbar.';
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [newContactDialogOpen, setNewContactDialogOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
+  const [isDrawerOpen, setIsDrawerOpen] = useAtom(isDrawerOpenAtom);
   const [isLeftToRight, setIsLeftToRight] = useAtom(isLeftToRightAtom);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -59,7 +59,7 @@ export default function AppBar() {
     <Fragment>
       <AppBarStyles
         position="absolute"
-        open={drawerOpen}
+        open={isDrawerOpen}
         isLeftToRight={isLeftToRight}
       >
         <Toolbar
@@ -72,13 +72,13 @@ export default function AppBar() {
             color="inherit"
             aria-label="open drawer"
             onClick={() => {
-              setDrawerOpen(!drawerOpen);
+              setIsDrawerOpen(!isDrawerOpen);
             }}
             sx={{
               ...(isLeftToRight
                 ? { marginRight: '36px' }
                 : { marginLeft: '36px' }),
-              ...(drawerOpen && { display: 'none' })
+              ...(isDrawerOpen && { display: 'none' })
             }}
           >
             <MenuIcon />
@@ -94,8 +94,8 @@ export default function AppBar() {
           </Typography>
           <IconButton
             aria-label="more"
-            aria-controls={drawerOpen ? 'long-menu' : undefined}
-            aria-expanded={drawerOpen ? 'true' : undefined}
+            aria-controls={isDrawerOpen ? 'long-menu' : undefined}
+            aria-expanded={isDrawerOpen ? 'true' : undefined}
             aria-haspopup="true"
             onClick={handleClick}
           >
