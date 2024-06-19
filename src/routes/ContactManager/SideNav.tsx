@@ -43,7 +43,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function SideNav() {
   const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
-  const [users] = useAtom(usersAtom);
+  const users = useAtomValue(usersAtom);
   const isLeftToRight = useAtomValue(isLeftToRightAtom);
 
   return (
