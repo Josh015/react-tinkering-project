@@ -1,3 +1,4 @@
+import { createTheme, ThemeProvider } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import {
   createBrowserRouter,
@@ -11,6 +12,7 @@ import ContactManager from './routes/ContactManager';
 import MainContent from './routes/ContactManager/MainContent';
 import NotFound from './routes/NotFound';
 
+const defaultTheme = createTheme();
 const router = createBrowserRouter([
   {
     path: '/contact-manager',
@@ -48,7 +50,9 @@ export default function App() {
 
   return (
     <div dir={isLeftToRight ? 'ltr' : 'rtl'}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={defaultTheme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </div>
   );
 }
