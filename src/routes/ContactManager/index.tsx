@@ -3,23 +3,20 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import AppBar from './AppBar';
 import SideNav from './SideNav';
-import { User } from 'src/models';
 
 const defaultTheme = createTheme();
 
 export default function ContactManager() {
-  const users = useLoaderData() as User[];
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar />
-        <SideNav users={users} />
+        <SideNav />
         <Box
           component="main"
           sx={{

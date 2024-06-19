@@ -10,14 +10,10 @@ import Toolbar from '@mui/material/Toolbar';
 import { useAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 
+import { usersAtom } from 'src/api/users';
 import { isDrawerOpenAtom } from 'src/contexts';
-import { User } from 'src/models';
 
 const drawerWidth = 240;
-
-interface SideNavProps {
-  users: User[];
-}
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open'
@@ -45,8 +41,9 @@ const Drawer = styled(MuiDrawer, {
   }
 }));
 
-export default function SideNav({ users }: SideNavProps) {
+export default function SideNav() {
   const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
+  const [users] = useAtom(usersAtom);
 
   return (
     <Drawer variant="permanent" open={drawerOpen}>

@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import {
   createBrowserRouter,
   Navigate,
@@ -14,9 +13,11 @@ const router = createBrowserRouter([
   {
     path: '/contact-manager',
     element: <ContactManager />,
-    loader: () => fetchUsers(),
+    loader: () => {
+      fetchUsers();
+      return true;
+    },
     children: [
-      { index: true, element: <Box /> },
       {
         path: ':id',
         element: <MainContent />,

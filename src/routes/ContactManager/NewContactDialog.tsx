@@ -66,12 +66,12 @@ export default function NewContactDialog({
         onClose={handleDialogClose}
         PaperProps={{
           component: 'form',
-          onSubmit: async (event: FormEvent<HTMLFormElement>) => {
+          onSubmit: (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
 
-            const newUser = await createUser({
+            const newUser = createUser({
               id: null,
               avatar: formJson.avatar as Avatar,
               gender: formJson.gender as Gender,
