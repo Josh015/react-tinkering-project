@@ -27,6 +27,7 @@ export default function NewContactDialog({
   const navigate = useNavigate();
   const [newUserId, setNewUserId] = useState<number | null>(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };

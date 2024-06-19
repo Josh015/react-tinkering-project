@@ -44,26 +44,15 @@ export default function AppBar() {
   const { t } = useTranslation();
   const prefix = 'ContactManager.Toolbar.';
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const menuOpen = Boolean(anchorEl);
+  const [newContactDialogOpen, setNewContactDialogOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
+  const [isLeftToRight, setIsLeftToRight] = useAtom(isLeftToRightAtom);
+
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-  const [newContactDialogOpen, setNewContactDialogOpen] = useState(false);
-  const handleNewContactDialogOpen = () => {
-    setNewContactDialogOpen(true);
-    handleClose();
-  };
-  const handleNewContactDialogClose = () => {
-    setNewContactDialogOpen(false);
-  };
-  const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
-  const [isLeftToRight, setIsLeftToRight] = useAtom(isLeftToRightAtom);
-  const handleToggleTextDirection = () => {
-    setIsLeftToRight(!isLeftToRight);
-    handleClose();
   };
 
   return (
@@ -114,7 +103,7 @@ export default function AppBar() {
           </IconButton>
           <Menu
             anchorEl={anchorEl}
-            open={menuOpen}
+            open={!!anchorEl}
             onClose={handleClose}
             anchorOrigin={{
               vertical: 'top',
@@ -125,13 +114,23 @@ export default function AppBar() {
               horizontal: 'left'
             }}
           >
-            <MenuItem onClick={handleNewContactDialogOpen}>
+            <MenuItem
+              onClick={() => {
+                setNewContactDialogOpen(true);
+                handleClose();
+              }}
+            >
               {t(`${prefix}Menu.NewContact`)}
             </MenuItem>
             <MenuItem disabled={true} onClick={handleClose}>
               {t(`${prefix}Menu.ToggleTheme`)}
             </MenuItem>
-            <MenuItem onClick={handleToggleTextDirection}>
+            <MenuItem
+              onClick={() => {
+                setIsLeftToRight(!isLeftToRight);
+                handleClose();
+              }}
+            >
               {t(`${prefix}Menu.ToggleDir`)}
             </MenuItem>
           </Menu>
@@ -140,7 +139,9 @@ export default function AppBar() {
 
       <NewContactDialog
         open={newContactDialogOpen}
-        onClose={handleNewContactDialogClose}
+        onClose={() => {
+          setNewContactDialogOpen(false);
+        }}
       />
     </Fragment>
   );
