@@ -24,7 +24,7 @@ pnpm start
 - [ ] Add user creation form validation with error-reporting.
 - [ ] Add `active` style for currently selected user in SideNav list.
 - [ ] Add theme-switching support via menu.
-- [ ] Add text-direction switching via menu.
+- [x] Add text-direction switching via menu.
 - [ ] Have menu collapsed state persist between redirects, unless on small screen size.
 - [ ] Fix icon color on toolbar menu icon.
 - [ ] Load and use `public/avatars.svg` icons.

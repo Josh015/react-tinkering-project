@@ -7,11 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 
 import { usersAtom } from 'src/api/users';
-import { isDrawerOpenAtom } from 'src/contexts';
+import { isDrawerOpenAtom, textDirectionAtom } from 'src/contexts';
 
 const drawerWidth = 240;
 
@@ -44,9 +44,14 @@ const Drawer = styled(MuiDrawer, {
 export default function SideNav() {
   const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
   const [users] = useAtom(usersAtom);
+  const textDirection = useAtomValue(textDirectionAtom);
 
   return (
-    <Drawer variant="permanent" open={drawerOpen}>
+    <Drawer
+      anchor={textDirection === 'ltr' ? 'left' : 'right'}
+      variant="permanent"
+      open={drawerOpen}
+    >
       <Toolbar
         sx={{
           display: 'flex',

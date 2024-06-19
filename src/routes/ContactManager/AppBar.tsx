@@ -11,24 +11,27 @@ import { Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NewContactDialog from './NewContactDialog';
-import { isDrawerOpenAtom } from 'src/contexts';
+import { isDrawerOpenAtom, textDirectionAtom } from 'src/contexts';
 
 const drawerWidth = 240;
 
 interface AppBarStylesProps extends MuiAppBarProps {
   open?: boolean;
+  isLeftToRight?: boolean;
 }
 
 const AppBarStyles = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open'
-})<AppBarStylesProps>(({ theme, open }) => ({
+  shouldForwardProp: (prop) => prop !== 'open' && prop !== 'isLeftToRight'
+})<AppBarStylesProps>(({ theme, open, isLeftToRight }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
   ...(open && {
-    marginLeft: drawerWidth,
+    ...(isLeftToRight
+      ? { marginLeft: drawerWidth }
+      : { marginRight: drawerWidth }),
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -57,24 +60,36 @@ export default function AppBar() {
     setNewContactDialogOpen(false);
   };
   const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
+  const [textDirection, setTextDirection] = useAtom(textDirectionAtom);
+  const isLeftToRight = textDirection === 'ltr';
+  const handleToggleTextDirection = () => {
+    setTextDirection(isLeftToRight ? 'rtl' : 'ltr');
+    handleClose();
+  };
 
   return (
     <Fragment>
-      <AppBarStyles position="absolute" open={drawerOpen}>
+      <AppBarStyles
+        position="absolute"
+        open={drawerOpen}
+        isLeftToRight={isLeftToRight}
+      >
         <Toolbar
           sx={{
             pr: '24px' // keep right padding when drawer closed
           }}
         >
           <IconButton
-            edge="start"
+            edge={isLeftToRight ? 'start' : 'end'}
             color="inherit"
             aria-label="open drawer"
             onClick={() => {
               setDrawerOpen(!drawerOpen);
             }}
             sx={{
-              marginRight: '36px',
+              ...(isLeftToRight
+                ? { marginRight: '36px' }
+                : { marginLeft: '36px' }),
               ...(drawerOpen && { display: 'none' })
             }}
           >
@@ -117,7 +132,7 @@ export default function AppBar() {
             <MenuItem disabled={true} onClick={handleClose}>
               {t(`${prefix}Menu.ToggleTheme`)}
             </MenuItem>
-            <MenuItem disabled={true} onClick={handleClose}>
+            <MenuItem onClick={handleToggleTextDirection}>
               {t(`${prefix}Menu.ToggleDir`)}
             </MenuItem>
           </Menu>

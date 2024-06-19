@@ -1,3 +1,4 @@
+import { useAtomValue } from 'jotai';
 import {
   createBrowserRouter,
   Navigate,
@@ -5,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import { fetchUsers, getUser } from './api/users';
+import { textDirectionAtom } from './contexts';
 import ContactManager from './routes/ContactManager';
 import MainContent from './routes/ContactManager/MainContent';
 import NotFound from './routes/NotFound';
@@ -42,5 +44,11 @@ if (import.meta.hot) {
 }
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  const textDirection = useAtomValue(textDirectionAtom);
+
+  return (
+    <div dir={textDirection}>
+      <RouterProvider router={router} />
+    </div>
+  );
 }
