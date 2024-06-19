@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import { fetchUsers, getUser } from './api/users';
-import { textDirectionAtom } from './contexts';
+import { isLeftToRightAtom } from './contexts';
 import ContactManager from './routes/ContactManager';
 import MainContent from './routes/ContactManager/MainContent';
 import NotFound from './routes/NotFound';
@@ -44,10 +44,10 @@ if (import.meta.hot) {
 }
 
 export default function App() {
-  const textDirection = useAtomValue(textDirectionAtom);
+  const isLeftToRight = useAtomValue(isLeftToRightAtom);
 
   return (
-    <div dir={textDirection}>
+    <div dir={isLeftToRight ? 'ltr' : 'rtl'}>
       <RouterProvider router={router} />
     </div>
   );

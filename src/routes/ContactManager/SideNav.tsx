@@ -11,7 +11,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { Link } from 'react-router-dom';
 
 import { usersAtom } from 'src/api/users';
-import { isDrawerOpenAtom, textDirectionAtom } from 'src/contexts';
+import { isDrawerOpenAtom, isLeftToRightAtom } from 'src/contexts';
 
 const drawerWidth = 240;
 
@@ -44,11 +44,11 @@ const Drawer = styled(MuiDrawer, {
 export default function SideNav() {
   const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
   const [users] = useAtom(usersAtom);
-  const textDirection = useAtomValue(textDirectionAtom);
+  const isLeftToRight = useAtomValue(isLeftToRightAtom);
 
   return (
     <Drawer
-      anchor={textDirection === 'ltr' ? 'left' : 'right'}
+      anchor={isLeftToRight ? 'left' : 'right'}
       variant="permanent"
       open={drawerOpen}
     >

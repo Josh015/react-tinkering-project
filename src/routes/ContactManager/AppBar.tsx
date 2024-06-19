@@ -11,7 +11,7 @@ import { Fragment, MouseEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NewContactDialog from './NewContactDialog';
-import { isDrawerOpenAtom, textDirectionAtom } from 'src/contexts';
+import { isDrawerOpenAtom, isLeftToRightAtom } from 'src/contexts';
 
 const drawerWidth = 240;
 
@@ -60,10 +60,9 @@ export default function AppBar() {
     setNewContactDialogOpen(false);
   };
   const [drawerOpen, setDrawerOpen] = useAtom(isDrawerOpenAtom);
-  const [textDirection, setTextDirection] = useAtom(textDirectionAtom);
-  const isLeftToRight = textDirection === 'ltr';
+  const [isLeftToRight, setIsLeftToRight] = useAtom(isLeftToRightAtom);
   const handleToggleTextDirection = () => {
-    setTextDirection(isLeftToRight ? 'rtl' : 'ltr');
+    setIsLeftToRight(!isLeftToRight);
     handleClose();
   };
 
