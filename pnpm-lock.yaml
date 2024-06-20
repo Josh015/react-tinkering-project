@@ -63,9 +63,6 @@ importers:
       '@cspell/eslint-plugin':
         specifier: ^8.9.0
         version: 8.9.0(eslint@9.5.0)
-      '@eslint/eslintrc':
-        specifier: ^3.1.0
-        version: 3.1.0
       '@eslint/js':
         specifier: ^9.5.0
         version: 9.5.0

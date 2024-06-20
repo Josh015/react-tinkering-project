@@ -1,19 +1,10 @@
 import cspellRecommended from '@cspell/eslint-plugin/recommended';
-import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import ts from 'typescript-eslint';
-
-const __dirname = import.meta.dirname;
-const compat = new FlatCompat({
-  baseDirectory: __dirname, // optional; default: process.cwd()
-  resolvePluginsRelativeTo: __dirname, // optional
-  recommendedConfig: js.configs.recommended, // optional unless using "eslint:recommended"
-  allConfig: js.configs.all // optional unless using "eslint:all"
-});
 
 export default ts.config(
   {
@@ -29,7 +20,7 @@ export default ts.config(
       },
       parserOptions: {
         project: true,
-        tsconfigRootDir: __dirname
+        tsconfigRootDir: import.meta.dirname
       }
     }
   },
@@ -40,13 +31,15 @@ export default ts.config(
     files: ['**/*.ts', '**/*.tsx'],
     extends: [
       ...ts.configs.strictTypeChecked,
-      ...ts.configs.stylisticTypeChecked,
-      ...compat.config(reactHooks.configs.recommended)
+      ...ts.configs.stylisticTypeChecked
     ],
     plugins: {
+      'react-hooks': reactHooks,
       'react-refresh': reactRefresh
     },
     rules: {
+      ...reactHooks.configs.recommended.rules,
+
       // React fixes
       'react-refresh/only-export-components': [
         'warn',
