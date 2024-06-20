@@ -26,10 +26,10 @@ export default function NewContactDialog({
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [newUserId, setNewUserId] = useState<number | null>(null);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
+    setIsSnackbarOpen(false);
   };
   const handleDialogClose = () => {
     if (onClose !== undefined) {
@@ -84,7 +84,7 @@ export default function NewContactDialog({
 
             setNewUserId(newUser.id ?? 0);
             handleDialogClose();
-            setSnackbarOpen(true);
+            setIsSnackbarOpen(true);
           }
         }}
       >
@@ -165,7 +165,7 @@ export default function NewContactDialog({
         </DialogActions>
       </Dialog>
       <Snackbar
-        open={snackbarOpen}
+        open={isSnackbarOpen}
         autoHideDuration={6000}
         message={t(`${prefix}SnackBar.Message`)}
         action={action}
