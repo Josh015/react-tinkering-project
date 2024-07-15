@@ -7,6 +7,7 @@ const config = {
   endOfLine: 'crlf',
   printWidth: 80,
   trailingComma: 'none',
+  htmlWhitespaceSensitivity: 'ignore',
   importOrder: [
     '<TYPES>^(node:)',
     '<TYPES>',
