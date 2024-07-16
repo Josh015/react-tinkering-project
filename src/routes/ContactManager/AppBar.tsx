@@ -15,10 +15,10 @@ import { isDrawerOpenAtom, isLeftToRightAtom } from 'src/contexts';
 
 const drawerWidth = 240;
 
-interface AppBarStylesProps extends MuiAppBarProps {
+type AppBarStylesProps = {
   open?: boolean;
   isLeftToRight?: boolean;
-}
+} & MuiAppBarProps;
 
 const AppBarStyles = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open' && prop !== 'isLeftToRight'

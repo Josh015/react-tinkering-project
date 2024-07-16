@@ -13,10 +13,10 @@ import { useNavigate } from 'react-router-dom';
 import { createUser } from 'src/api/users';
 import { Avatar, AVATARS, Gender, GENDERS, User } from 'src/models';
 
-interface NewContactDialogProps {
+type NewContactDialogProps = {
   open: boolean;
   onClose?: (user: User | null) => void;
-}
+};
 
 export default function NewContactDialog({
   open,
