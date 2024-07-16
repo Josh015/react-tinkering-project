@@ -47,6 +47,7 @@ export default ts.config(
       ],
 
       // Preferences
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
